@@ -23,7 +23,7 @@ namespace spaar.Mods.FreeCamera
 
     public override void OnLoad()
     {
-
+      UnityEngine.Object.DontDestroyOnLoad(FreeCamera.Instance);
     }
 
     public override void OnUnload()
