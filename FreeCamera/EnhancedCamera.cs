@@ -2,11 +2,11 @@
 using spaar.ModLoader;
 using UnityEngine;
 
-namespace spaar.Mods.FreeCamera
+namespace spaar.Mods.EnhancedCamera
 {
-  public class FreeCamera : SingleInstance<FreeCamera>
+  public class EnhancedCamera : SingleInstance<EnhancedCamera>
   {
-    public override string Name { get; } = "Free Camera";
+    public override string Name { get; } = "Enhanced Camera";
 
     public void Start()
     {
@@ -23,11 +23,11 @@ namespace spaar.Mods.FreeCamera
       var mouseOrbit = Camera.main.GetComponent<MouseOrbit>();
       if (mouseOrbit != null)
       {
-        var freeOrbit = Camera.main.gameObject.AddComponent<FreeMouseOrbit>();
-        freeOrbit.CopyFrom(mouseOrbit);
+        var enhancedOrbit = Camera.main.gameObject.AddComponent<EnhancedMouseOrbit>();
+        enhancedOrbit.CopyFrom(mouseOrbit);
         Destroy(mouseOrbit);
 
-        FindObjectOfType<ResetCameraButton>().camCode = freeOrbit;
+        FindObjectOfType<ResetCameraButton>().camCode = enhancedOrbit;
       }
     }
   }

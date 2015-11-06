@@ -7,8 +7,8 @@
     <ProjectGuid>{6A16F1F7-31C2-4CAE-9FD3-0C56BBD29757}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>spaar.Mods.FreeCamera</RootNamespace>
-    <AssemblyName>FreeCamera</AssemblyName>
+    <RootNamespace>spaar.Mods.EnhancedCamera</RootNamespace>
+    <AssemblyName>EnhancedCamera</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -50,8 +50,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FreeCamera.cs" />
-    <Compile Include="FreeMouseOrbit.cs" />
+    <Compile Include="EnhancedCamera.cs" />
+    <Compile Include="EnhancedMouseOrbit.cs" />
     <Compile Include="Mod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

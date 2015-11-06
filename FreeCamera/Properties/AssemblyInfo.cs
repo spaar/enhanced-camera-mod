@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Free Camera")]
+[assembly: AssemblyTitle("Enhanced Camera")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("spaar")]
-[assembly: AssemblyProduct("Free Camera mod for Besiege")]
+[assembly: AssemblyProduct("Enhanced Camera mod for Besiege")]
 [assembly: AssemblyCopyright("Copyright © spaar 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

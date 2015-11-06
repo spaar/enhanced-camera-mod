@@ -2,7 +2,7 @@
 using spaar.ModLoader;
 using UnityEngine;
 
-namespace spaar.Mods.FreeCamera
+namespace spaar.Mods.EnhancedCamera
 {
 
   // If you need documentation about any of these values or the mod loader
@@ -10,8 +10,8 @@ namespace spaar.Mods.FreeCamera
 
   public class FreeCameraMod : spaar.ModLoader.Mod
   {
-    public override string Name { get; } = "freeCamera";
-    public override string DisplayName { get; } = "Free Camera";
+    public override string Name { get; } = "enhancedCamera";
+    public override string DisplayName { get; } = "Enhanced Camera";
     public override string Author { get; } = "spaar";
     public override Version Version { get; } = new Version(1, 0, 0);
 
@@ -23,7 +23,7 @@ namespace spaar.Mods.FreeCamera
 
     public override void OnLoad()
     {
-      UnityEngine.Object.DontDestroyOnLoad(FreeCamera.Instance);
+      UnityEngine.Object.DontDestroyOnLoad(EnhancedCamera.Instance);
 
       Keybindings.AddKeybinding("Forward", new Key(KeyCode.None, KeyCode.W));
       Keybindings.AddKeybinding("Backward", new Key(KeyCode.None, KeyCode.S));

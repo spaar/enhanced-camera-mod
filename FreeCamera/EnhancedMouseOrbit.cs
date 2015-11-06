@@ -2,9 +2,9 @@
 using spaar.ModLoader;
 using UnityEngine;
 
-namespace spaar.Mods.FreeCamera
+namespace spaar.Mods.EnhancedCamera
 {
-  public class FreeMouseOrbit : MouseOrbit
+  public class EnhancedMouseOrbit : MouseOrbit
   {
     public Vector3 UpDownTranslation = new Vector3(0, 1, 0);
 
