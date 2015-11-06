@@ -26,6 +26,8 @@ namespace spaar.Mods.FreeCamera
         var freeOrbit = Camera.main.gameObject.AddComponent<FreeMouseOrbit>();
         freeOrbit.CopyFrom(mouseOrbit);
         Destroy(mouseOrbit);
+
+        FindObjectOfType<ResetCameraButton>().camCode = freeOrbit;
       }
     }
   }
