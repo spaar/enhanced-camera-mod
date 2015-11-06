@@ -1,4 +1,5 @@
 ﻿using System;
+using spaar.ModLoader;
 using UnityEngine;
 
 namespace spaar.Mods.FreeCamera
@@ -6,6 +7,8 @@ namespace spaar.Mods.FreeCamera
   public class FreeMouseOrbit : MouseOrbit
   {
     public Vector3 UpDownTranslation = new Vector3(0, 1, 0);
+
+    private Key forward, backward, left, right, up, down;
 
     public void CopyFrom(MouseOrbit o)
     {
@@ -41,6 +44,13 @@ namespace spaar.Mods.FreeCamera
       fixedCamLerpRotSpeed = o.fixedCamLerpRotSpeed;
       lerpedUpVector = o.lerpedUpVector;
       yPosClamp = o.yPosClamp;
+
+      forward = Keybindings.Get("Forward");
+      backward = Keybindings.Get("Backward");
+      left = Keybindings.Get("Left");
+      right = Keybindings.Get("Right");
+      up = Keybindings.Get("Up");
+      down = Keybindings.Get("Down");
     }
 
     public override void WASD()
@@ -49,22 +59,45 @@ namespace spaar.Mods.FreeCamera
       {
         // Counteract vanilla W movement
         wasdPOSdelegate = wasdPOSdelegate - (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
-
-        wasdPOSdelegate = wasdPOSdelegate + (transform.forward * wasdSpeed);
       }
       if (Input.GetKey(KeyCode.S))
       {
         // Counteract vanilla S movement
         wasdPOSdelegate = wasdPOSdelegate + (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
-
-        wasdPOSdelegate = wasdPOSdelegate - (transform.forward * wasdSpeed);
+      }
+      if (Input.GetKey(KeyCode.A))
+      {
+        // Counteract vanilla A movement
+        wasdPOSdelegate = wasdPOSdelegate + (transform.right * wasdSpeed);
+      }
+      if (Input.GetKey(KeyCode.D))
+      {
+        // Counteract vanilla D movement
+        wasdPOSdelegate = wasdPOSdelegate - (transform.right * wasdSpeed);
       }
 
-      if (Input.GetKey(KeyCode.Q))
+      if (forward.IsDown())
+      {
+        wasdPOSdelegate = wasdPOSdelegate + (transform.forward * wasdSpeed);
+      }
+
+      if (backward.IsDown())
+      {
+        wasdPOSdelegate = wasdPOSdelegate - (transform.forward * wasdSpeed);
+      }
+      if (left.IsDown()) {
+        wasdPOSdelegate = wasdPOSdelegate - (transform.right * wasdSpeed);
+      }
+      if (right.IsDown())
+      {
+        wasdPOSdelegate = wasdPOSdelegate + (transform.right * wasdSpeed);
+      }
+
+      if (up.IsDown())
       {
         wasdPOSdelegate = wasdPOSdelegate + (transform.up * wasdSpeed);
       }
-      if (Input.GetKey(KeyCode.E))
+      if (down.IsDown())
       {
         wasdPOSdelegate = wasdPOSdelegate - (transform.up * wasdSpeed);
       }

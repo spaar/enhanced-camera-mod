@@ -24,6 +24,13 @@ namespace spaar.Mods.FreeCamera
     public override void OnLoad()
     {
       UnityEngine.Object.DontDestroyOnLoad(FreeCamera.Instance);
+
+      Keybindings.AddKeybinding("Forward", new Key(KeyCode.None, KeyCode.W));
+      Keybindings.AddKeybinding("Backward", new Key(KeyCode.None, KeyCode.S));
+      Keybindings.AddKeybinding("Left", new Key(KeyCode.None, KeyCode.A));
+      Keybindings.AddKeybinding("Right", new Key(KeyCode.None, KeyCode.D));
+      Keybindings.AddKeybinding("Up", new Key(KeyCode.None, KeyCode.Q));
+      Keybindings.AddKeybinding("Down", new Key(KeyCode.None, KeyCode.E));
     }
 
     public override void OnUnload()
