@@ -1,5 +1,6 @@
 ﻿using System;
 using spaar.ModLoader;
+using spaar.ModLoader.UI;
 using UnityEngine;
 
 namespace spaar.Mods.EnhancedCamera
@@ -8,7 +9,11 @@ namespace spaar.Mods.EnhancedCamera
   {
     public Vector3 UpDownTranslation = new Vector3(0, 1, 0);
 
-    private Key forward, backward, left, right, up, down;
+    private Key forward, backward, left, right, up, down, menu;
+
+    private bool guiVisible = false;
+    private int windowID = Util.GetWindowID();
+    private Rect windowRect = new Rect(150, 150, 200, 210);
 
     public void CopyFrom(MouseOrbit o)
     {
@@ -51,6 +56,11 @@ namespace spaar.Mods.EnhancedCamera
       right = Keybindings.Get("Right");
       up = Keybindings.Get("Up");
       down = Keybindings.Get("Down");
+      menu = Keybindings.Get("Menu");
+
+      wasdSpeed = Configuration.GetFloat("wasdSpeed", wasdSpeed);
+      scrollSensitivityScaler = Configuration.GetFloat("scrollSpeed",
+        scrollSensitivityScaler);
     }
 
     public override void WASD()
@@ -102,7 +112,48 @@ namespace spaar.Mods.EnhancedCamera
         wasdPOSdelegate = wasdPOSdelegate - (transform.up * wasdSpeed);
       }
 
+      if (menu.Pressed())
+      {
+        guiVisible = !guiVisible;
+      }
+
       base.WASD();
+    }
+
+    private void OnGUI()
+    {
+      if (!guiVisible) return;
+
+      GUI.skin = ModGUI.Skin;
+      windowRect = GUI.Window(windowID, windowRect, DoWindow, "Enhanced Camera");
+    }
+
+    private void DoWindow(int id)
+    {
+      GUILayout.Label("Keyboard speed:");
+
+      var oldSpeed = wasdSpeed;
+      wasdSpeed = GUILayout.HorizontalSlider(wasdSpeed, 0.0f, 5.0f);
+      float.TryParse(GUILayout.TextField(wasdSpeed.ToString()), out wasdSpeed);
+
+      if (oldSpeed != wasdSpeed)
+      {
+        Configuration.SetFloat("wasdSpeed", wasdSpeed);
+      }
+
+      oldSpeed = scrollSensitivityScaler;
+      GUILayout.Label("Zoom speed:");
+      scrollSensitivityScaler = GUILayout.HorizontalSlider(
+        scrollSensitivityScaler, 0.0f, 5.0f);
+      float.TryParse(GUILayout.TextField(scrollSensitivityScaler.ToString()),
+        out scrollSensitivityScaler);
+
+      if (oldSpeed != scrollSensitivityScaler)
+      {
+        Configuration.SetFloat("scrollSpeed", scrollSensitivityScaler);
+      }
+
+      GUI.DragWindow();
     }
   }
 }

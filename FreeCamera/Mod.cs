@@ -31,11 +31,12 @@ namespace spaar.Mods.EnhancedCamera
       Keybindings.AddKeybinding("Right", new Key(KeyCode.None, KeyCode.D));
       Keybindings.AddKeybinding("Up", new Key(KeyCode.None, KeyCode.Q));
       Keybindings.AddKeybinding("Down", new Key(KeyCode.None, KeyCode.E));
+      Keybindings.AddKeybinding("Menu", new Key(KeyCode.LeftAlt, KeyCode.C));
     }
 
     public override void OnUnload()
     {
-
+      Configuration.Save();
     }
   }
 }
