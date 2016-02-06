@@ -26,7 +26,7 @@ namespace spaar.Mods.EnhancedCamera
       x = o.x;
       y = o.y;
       smooth = o.smooth;
-      wasdPOSdelegate = o.wasdPOSdelegate;
+      wasdPosOffset = o.wasdPosOffset;
       wasdSpeed = o.wasdSpeed;
       zoomSmooth = o.zoomSmooth;
       introDuration = o.introDuration;
@@ -49,6 +49,7 @@ namespace spaar.Mods.EnhancedCamera
       fixedCamLerpRotSpeed = o.fixedCamLerpRotSpeed;
       lerpedUpVector = o.lerpedUpVector;
       yPosClamp = o.yPosClamp;
+      hud3Dcam = o.hud3Dcam;
 
       forward = Keybindings.Get("Forward");
       backward = Keybindings.Get("Backward");
@@ -68,48 +69,48 @@ namespace spaar.Mods.EnhancedCamera
       if (Input.GetKey(KeyCode.W))
       {
         // Counteract vanilla W movement
-        wasdPOSdelegate = wasdPOSdelegate - (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
+        wasdPosOffset = wasdPosOffset - (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
       }
       if (Input.GetKey(KeyCode.S))
       {
         // Counteract vanilla S movement
-        wasdPOSdelegate = wasdPOSdelegate + (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
+        wasdPosOffset = wasdPosOffset + (Vector3.Cross(transform.right, Vector3.up) * wasdSpeed);
       }
       if (Input.GetKey(KeyCode.A))
       {
         // Counteract vanilla A movement
-        wasdPOSdelegate = wasdPOSdelegate + (transform.right * wasdSpeed);
+        wasdPosOffset = wasdPosOffset + (transform.right * wasdSpeed);
       }
       if (Input.GetKey(KeyCode.D))
       {
         // Counteract vanilla D movement
-        wasdPOSdelegate = wasdPOSdelegate - (transform.right * wasdSpeed);
+        wasdPosOffset = wasdPosOffset - (transform.right * wasdSpeed);
       }
 
       if (forward.IsDown())
       {
-        wasdPOSdelegate = wasdPOSdelegate + (transform.forward * wasdSpeed);
+        wasdPosOffset = wasdPosOffset + (transform.forward * wasdSpeed);
       }
 
       if (backward.IsDown())
       {
-        wasdPOSdelegate = wasdPOSdelegate - (transform.forward * wasdSpeed);
+        wasdPosOffset = wasdPosOffset - (transform.forward * wasdSpeed);
       }
       if (left.IsDown()) {
-        wasdPOSdelegate = wasdPOSdelegate - (transform.right * wasdSpeed);
+        wasdPosOffset = wasdPosOffset - (transform.right * wasdSpeed);
       }
       if (right.IsDown())
       {
-        wasdPOSdelegate = wasdPOSdelegate + (transform.right * wasdSpeed);
+        wasdPosOffset = wasdPosOffset + (transform.right * wasdSpeed);
       }
 
       if (up.IsDown())
       {
-        wasdPOSdelegate = wasdPOSdelegate + (transform.up * wasdSpeed);
+        wasdPosOffset = wasdPosOffset + (transform.up * wasdSpeed);
       }
       if (down.IsDown())
       {
-        wasdPOSdelegate = wasdPOSdelegate - (transform.up * wasdSpeed);
+        wasdPosOffset = wasdPosOffset - (transform.up * wasdSpeed);
       }
 
       if (menu.Pressed())
