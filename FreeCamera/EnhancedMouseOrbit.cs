@@ -11,9 +11,11 @@ namespace spaar.Mods.EnhancedCamera
 
     private Key forward, backward, left, right, up, down, menu;
 
+    private float fov;
+
     private bool guiVisible = false;
     private int windowID = Util.GetWindowID();
-    private Rect windowRect = new Rect(150, 150, 200, 210);
+    private Rect windowRect = new Rect(150, 150, 200, 280);
 
     public void CopyFrom(MouseOrbit o)
     {
@@ -62,6 +64,8 @@ namespace spaar.Mods.EnhancedCamera
       wasdSpeed = Configuration.GetFloat("wasdSpeed", wasdSpeed);
       scrollSensitivityScaler = Configuration.GetFloat("scrollSpeed",
         scrollSensitivityScaler);
+
+      fov = Configuration.GetFloat("fov", Camera.main.fieldOfView);
     }
 
     public override void WASD()
@@ -142,8 +146,9 @@ namespace spaar.Mods.EnhancedCamera
         Configuration.SetFloat("wasdSpeed", wasdSpeed);
       }
 
-      oldSpeed = scrollSensitivityScaler;
       GUILayout.Label("Zoom speed:");
+
+      oldSpeed = scrollSensitivityScaler;
       scrollSensitivityScaler = GUILayout.HorizontalSlider(
         scrollSensitivityScaler, 0.0f, 5.0f);
       float.TryParse(GUILayout.TextField(scrollSensitivityScaler.ToString()),
@@ -152,6 +157,18 @@ namespace spaar.Mods.EnhancedCamera
       if (oldSpeed != scrollSensitivityScaler)
       {
         Configuration.SetFloat("scrollSpeed", scrollSensitivityScaler);
+      }
+
+      GUILayout.Label("Field of view:");
+
+      var oldFov = fov;
+      fov = GUILayout.HorizontalSlider(fov, 40f, 100f);
+      float.TryParse(GUILayout.TextField(fov.ToString()), out fov);
+
+      if (oldFov != fov)
+      {
+        Configuration.SetFloat("fov", fov);
+        Camera.main.fieldOfView = fov;
       }
 
       GUI.DragWindow();
