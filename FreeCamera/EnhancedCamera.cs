@@ -1,6 +1,7 @@
 ﻿using System;
 using spaar.ModLoader;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace spaar.Mods.EnhancedCamera
 {
@@ -11,9 +12,11 @@ namespace spaar.Mods.EnhancedCamera
     public void Start()
     {
       ReplaceMouseOrbit();
+
+      SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void OnLevelWasLoaded()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
       ReplaceMouseOrbit();
     }
