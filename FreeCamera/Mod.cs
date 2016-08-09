@@ -13,7 +13,7 @@ namespace spaar.Mods.EnhancedCamera
     public override string Name { get; } = "enhancedCamera";
     public override string DisplayName { get; } = "Enhanced Camera";
     public override string Author { get; } = "spaar";
-    public override Version Version { get; } = new Version(1, 2, 0);
+    public override Version Version { get; } = new Version(1, 2, 1);
 
     public override string VersionExtra { get; } = "";
 
