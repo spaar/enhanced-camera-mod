@@ -15,7 +15,7 @@ namespace spaar.Mods.EnhancedCamera
 
     private bool guiVisible = false;
     private int windowID = Util.GetWindowID();
-    private Rect windowRect = new Rect(150, 150, 200, 280);
+    private Rect windowRect = new Rect(150, 150, 200, 360);
 
     public void CopyFrom(MouseOrbit o)
     {
@@ -64,8 +64,8 @@ namespace spaar.Mods.EnhancedCamera
       wasdSpeed = Configuration.GetFloat("wasdSpeed", wasdSpeed);
       scrollSensitivityScaler = Configuration.GetFloat("scrollSpeed",
         scrollSensitivityScaler);
-
       fov = Configuration.GetFloat("fov", Camera.main.fieldOfView);
+      focusLerpSmooth = Configuration.GetFloat("focusLerpSmooth", focusLerpSmooth);
     }
 
     public override void WASD()
@@ -169,6 +169,18 @@ namespace spaar.Mods.EnhancedCamera
       {
         Configuration.SetFloat("fov", fov);
         Camera.main.fieldOfView = fov;
+      }
+
+      GUILayout.Label("Focus smoothing:");
+
+      var oldSmoothing = focusLerpSmooth;
+      focusLerpSmooth = GUILayout.HorizontalSlider(focusLerpSmooth, 0f, 20f);
+
+      float.TryParse(GUILayout.TextField(focusLerpSmooth.ToString()), out focusLerpSmooth);
+
+      if (oldSmoothing != focusLerpSmooth)
+      {
+        Configuration.SetFloat("focusLerpSmooth", focusLerpSmooth);
       }
 
       GUI.DragWindow();
